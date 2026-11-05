@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>aø media | ALEJANDRO DIEGO, media design</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>
+@font-face{font-family:"Syne";src:url(fonts/syne.woff) format("woff");font-weight:400 800;font-display:swap}
+@font-face{font-family:"DM Sans";src:url(fonts/dmsans.woff) format("woff");font-weight:100 1000;font-display:swap}
+@font-face{font-family:"DM Mono";src:url(fonts/dmmono.woff) format("woff");font-weight:400;font-display:swap}
+</style>
+<style>
+/* Layout: one long dark page; a wordmark header, then one masonry gallery per client, each with a short mono caption line. */
+:root{
+  --bg:#0b0c0e;          /* black with a cold bias, like the chrome pieces */
+  --surface:#14161a;
+  --fg:#e9ebee;
+  --muted:#8d939c;
+  --line:#23262c;
+  --accent:#c9d3df;      /* polished steel */
+  --display:"Syne","Arial Black",system-ui,sans-serif;
+  --body:"DM Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font:400 16px/1.55 var(--body);padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0}
+.wrap{max-width:1240px;margin:0 auto}
+header{padding-block:56px 40px;display:grid;gap:28px;border-bottom:1px solid var(--line)}
+.mark{font:800 clamp(2.6rem,9vw,5.4rem)/1 var(--display);letter-spacing:-.02em;margin:0;text-wrap:balance}
+.mark span{color:inherit}
+.intro{max-width:62ch;color:var(--muted);margin:0;font:400 .9rem/1.75 var(--mono);letter-spacing:.03em}
+.intro span{display:block;margin-bottom:.9em}.intro span:last-child{margin-bottom:0}
+.intro .more{display:none;font:inherit;letter-spacing:.2em;color:var(--accent);background:none;border:0;padding:0 .4em;margin-left:.2em;cursor:pointer;vertical-align:baseline}
+.intro .more i{display:inline-block;font-style:normal;animation:wave 1.4s ease-in-out infinite}.intro .more i:nth-child(2){animation-delay:.15s}.intro .more i:nth-child(3){animation-delay:.3s}
+@keyframes wave{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-.32em)}}
+@media (prefers-reduced-motion:reduce){.intro .more i{animation:none}}
+.intro .more:hover,.intro .more:focus-visible{color:var(--fg);outline:none}
+.intro.js .more{display:inline}.intro.js:not(.open) #intro-more{display:none}.intro #intro-more{margin-top:.9em}
+@media (max-width:640px){.intro.js .more{display:block;margin:.1em 0 0;padding-left:0}}
+nav{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 22px;font:400 .78rem/1 var(--mono);letter-spacing:.08em;text-transform:uppercase}
+.nav-list{display:flex;flex-wrap:wrap;gap:8px 22px}
+.nav-contact{margin-left:auto}
+.nav-toggle{display:none;font:inherit;letter-spacing:inherit;text-transform:inherit;color:var(--fg);background:none;border:0;border-bottom:1px solid transparent;padding:6px 0;cursor:pointer}
+.nav-toggle::after{content:" +"}
+nav.open .nav-toggle::after{content:" \2212"}
+nav a{color:var(--fg);text-decoration:none;padding-block:6px;border-bottom:1px solid transparent}
+nav a:hover,nav a:focus-visible,.nav-toggle:hover,.nav-toggle:focus-visible{border-color:var(--accent);outline:none}
+@media (max-width:640px){nav.js .nav-toggle{display:inline-block}nav.js .nav-list{display:none;order:3;flex-basis:100%;flex-direction:column;gap:2px;padding-top:6px}nav.js.open .nav-list{display:flex}nav.js .nav-list a{padding-block:9px}}
+section{padding-block:56px 8px}
+.head{display:flex;flex-direction:column;align-items:flex-start;gap:8px;margin-bottom:22px}
+h2{font:800 clamp(1.5rem,4vw,2.4rem)/1.05 var(--display);margin:0;letter-spacing:-.01em;text-wrap:balance}
+.note{font:400 .8rem/1.4 var(--mono);color:var(--muted);letter-spacing:.04em;margin:0;max-width:60ch}
+.grid{columns:3 280px;column-gap:14px}
+@media (max-width:640px){.grid{columns:2;column-gap:10px}}
+figure{margin:0 0 14px;break-inside:avoid;background:var(--surface);position:relative}
+@media (max-width:640px){figure{margin-bottom:10px}}
+figure button{all:unset;display:block;width:100%;cursor:zoom-in}
+figure button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+figure.wide{column-span:all}
+.grid.ordered.js{display:flex;gap:14px;columns:auto;align-items:flex-start}
+.grid.ordered .col{flex:1;min-width:0}
+.wideblock{margin-top:14px}.wideblock figure{margin:0}
+@media (max-width:640px){.grid.ordered.js{gap:10px}.wideblock{margin-top:10px}}
+#visuals .grid{columns:5 190px;column-gap:12px}
+#visuals figcaption{display:none}
+@media (max-width:640px){#visuals .grid{columns:3;column-gap:8px}#visuals figcaption{font-size:10px}}
+figure img,figure video{display:block;width:100%;height:auto}
+figcaption{font:400 .72rem/1.35 var(--mono);color:var(--muted);padding:8px 10px 10px;letter-spacing:.03em}
+figcaption b{font-weight:400;color:var(--fg)}
+footer a{color:inherit;text-decoration:underline;text-underline-offset:3px}
+footer{margin-top:72px;padding-block:32px 56px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:8px 32px;justify-content:space-between;font:400 .78rem/1.5 var(--mono);color:var(--muted);letter-spacing:.04em}
+#lb{position:fixed;inset:0;z-index:50;background:rgba(5,6,7,.94);display:none;align-items:center;justify-content:center;padding:max(16px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) max(16px,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));flex-direction:column;gap:12px}
+#lb.on{display:flex}
+#lb img{max-width:100%;max-height:calc(100% - 64px);object-fit:contain}
+#lbcap{font:400 .78rem/1.4 var(--mono);color:var(--muted);text-align:center}
+#lb .ctl{position:absolute;top:max(12px,env(safe-area-inset-top,0px));right:max(12px,env(safe-area-inset-right,0px));display:flex;gap:8px}
+#lb button.c{font:400 .78rem/1 var(--mono);color:var(--fg);background:var(--surface);border:1px solid var(--line);padding:10px 14px;cursor:pointer;letter-spacing:.06em;text-transform:uppercase}
+#lb button.c:focus-visible,#lb button.c:hover{border-color:var(--accent);outline:none}
+@media (prefers-reduced-motion:no-preference){figure img{transition:opacity .25s}figure:hover img{opacity:.92}}
+</style>
+
+<div class="wrap">
+<header>
+  <nav aria-label="Sections">
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-list">portfolio</button>
+    <div id="nav-list" class="nav-list">
+      <a href="#nicolas-julian">Nicolas Julian</a>
+      <a href="#selected">[selected] Berlin</a>
+      <a href="#sesh">SESH</a>
+      <a href="#hive">HIVE Society</a>
+      <a href="#fifty-two">fifty__two</a>
+      <a href="#visuals">Creative direction</a>
+      <a href="#release">release²</a>
+    </div>
+    <a class="nav-contact" href="mailto:imprint@alejandrodiego.de">contact</a>
+  </nav>
+  <h1 class="mark">aø<span> media</span></h1>
+  <div class="intro" id="intro"><span>10+ years of experience in multidisciplinary design and copywriting, based in Mannheim. <button class="more" type="button" aria-expanded="false" aria-controls="intro-more" aria-label="show more"><i>&middot;</i><i>&middot;</i><i>&middot;</i></button></span><div id="intro-more"><span>with a background in music and events, and shaped by his studies in linguistics and history, Alejandro Diego creates artwork, cover design and event visuals for electronic music, from chrome and glass for Nicolas Julian to the full HIVE Society Records catalogue.</span><span>beyond music, he has worked for the University of Mannheim, for clubs, radio stations and other clients in mobility, hospitality and wellness.</span></div></div>
+</header>
+
+<section id="nicolas-julian">
+  <div class="head"><h2>Nicolas Julian</h2><p class="note">concept shows, free rave, cover artwork and label artworks. one chrome and black language across print, feed and story.</p></div>
+  <div class="grid ordered">
+    <figure data-r="1.793"><video muted loop autoplay playsinline preload="metadata" poster="vid/nj-diamond-chain-1.jpg" aria-label="Animated diamond wrapped in a swinging chain"><source src="vid/nj-diamond-chain-1.mp4" type="video/mp4"></video><figcaption><b>diamond and chain I</b><br>animation</figcaption></figure>
+    <figure data-r="1.0"><button data-src="img/nj-hit-the-floor.jpg"><img loading="lazy" src="img/nj-hit-the-floor.jpg" alt="Hit The Floor cover artwork, chrome music player"></button><figcaption><b>Hit The Floor</b><br>cover artwork</figcaption></figure>
+    <figure data-r="1.778"><button data-src="img/nj-anl-munich.jpg"><img loading="lazy" src="img/nj-anl-munich.jpg" alt="Nicolas Julian Concept Show, chrome snake around a black apple, DNA Munich"></button><figcaption><b>All Night Long</b><br>concept show, Munich, 16/05/25</figcaption></figure>
+    <figure data-r="1.414"><button data-src="img/nj-vex.jpg"><img loading="lazy" src="img/nj-vex.jpg" alt="Nicolas Julian at VEX poster draft"></button><figcaption><b>VEX Collective presents</b><br>poster draft</figcaption></figure>
+    <figure data-r="1.793"><video muted loop autoplay playsinline preload="metadata" poster="vid/nj-diamond-chain-2.jpg" aria-label="Animated diamond in rusted chains, close up"><source src="vid/nj-diamond-chain-2.mp4" type="video/mp4"></video><figcaption><b>diamond and chain II</b><br>animation</figcaption></figure>
+    <figure data-r="1.0"><video muted loop autoplay playsinline preload="metadata" poster="vid/mh-anim-5.jpg" aria-label="Animated cover loop for Don't Stop The Party"><source src="vid/mh-anim-5.mp4" type="video/mp4"></video><figcaption><b>Don't Stop The Party</b><br>Mile High Club, animation</figcaption></figure>
+    <figure data-r="1.25"><button data-src="img/nj-free-rave.jpg"><img loading="lazy" src="img/nj-free-rave.jpg" alt="Nicolas Julian Free Rave Berlin poster"></button><figcaption><b>Free Rave</b><br>Berlin, 25/04/26</figcaption></figure>
+    <figure data-r="1.778"><button data-src="img/nj-anl-berlin.jpg"><img loading="lazy" src="img/nj-anl-berlin.jpg" alt="Nicolas Julian Concept Show, chrome thorns on black, Annomalie Berlin"></button><figcaption><b>All Night Long</b><br>concept show, Berlin, 14/12/24</figcaption></figure>
+    <figure data-r="1.0"><button data-src="img/mh-terza.jpg"><img loading="lazy" src="img/mh-terza.jpg" alt="TERZA Don't Stop The Party cover, chrome speaker with cyan light"></button><figcaption><b>Terza, Don't Stop The Party</b><br>Mile High Club, cover</figcaption></figure>
+    <figure data-r="1.25"><button data-src="img/nj-all-night-long.jpg"><img loading="lazy" src="img/nj-all-night-long.jpg" alt="Nicolas Julian All Night Long concept show poster, Hamburg"></button><figcaption><b>All Night Long</b><br>concept show, Hamburg, 07/02/26</figcaption></figure>
+    <figure data-r="1.0"><button data-src="img/nj-chrome-shades.jpg"><img loading="lazy" src="img/nj-chrome-shades.jpg" alt="Chrome rave shades product render"></button><figcaption><b>Chrome Smiley Shades</b><br>merch render</figcaption></figure>
+  </div>
+  <div class="wideblock">
+    <figure ><button data-src="img/nj-tour-dates.jpg"><img loading="lazy" src="img/nj-tour-dates.jpg" alt="Tour dates graphic, March to May, red set with two portraits"></button><figcaption><b>tour dates</b><br>spring tour graphic</figcaption></figure>
+  </div>
+</section>
+
+<section id="selected">
+  <div class="head"><h2>[selected] Berlin</h2><p class="note">label covers, podcast artwork and event visuals for the Berlin label.</p></div>
+  <div class="grid">
+    <figure><button data-src="img/sel-hammer.jpg"><img loading="lazy" src="img/sel-hammer.jpg" alt="Strauss Hammer of Dawn EP cover"></button><figcaption><b>Strauss</b><br>Hammer of Dawn EP, S032</figcaption></figure>
+    <figure><button data-src="img/sel-redlights.jpg"><img loading="lazy" src="img/sel-redlights.jpg" alt="Royboy Red Lights cover"></button><figcaption><b>Royboy</b><br>Red Lights, S033</figcaption></figure>
+    <figure><button data-src="img/sel-fluid.jpg"><img loading="lazy" src="img/sel-fluid.jpg" alt="[selected] x Fluid RSO Berlin story"></button><figcaption><b>[selected] × Fluid</b><br>RSO Berlin, 27/11/26</figcaption></figure>
+    <figure><button data-src="img/sel-rbwy.jpg"><img loading="lazy" src="img/sel-rbwy.jpg" alt="Frederic. Rather Be With You album cover, final version"></button><figcaption><b>Frederic.</b><br>Rather Be With You, album cover</figcaption></figure>
+    <figure><button data-src="img/sel-td2.jpg"><img loading="lazy" src="img/sel-td2.jpg" alt="Frederic. TD2 cover"></button><figcaption><b>Frederic.</b><br>TD2 (feat. MCR-T)</figcaption></figure>
+    <figure><button data-src="img/sel-badkingdom.jpg"><img loading="lazy" src="img/sel-badkingdom.jpg" alt="Frederic. Bad Kingdom vinyl cover"></button><figcaption><b>Frederic.</b><br>Bad Kingdom, 2025 New Era Mix</figcaption></figure>
+    <figure><button data-src="img/sel-podcast64.jpg"><img loading="lazy" src="img/sel-podcast64.jpg" alt="Strauss podcast 064 cover"></button><figcaption><b>podcast 064</b><br>Strauss.</figcaption></figure>
+    <figure><button data-src="img/sel-showcase.jpg"><img loading="lazy" src="img/sel-showcase.jpg" alt="[selected] Day and Night Showcase Hamburg story"></button><figcaption><b>Day and Night Showcase</b><br>Hamburg, 24/05/25</figcaption></figure>
+  </div>
+</section>
+
+<section id="sesh">
+  <div class="head"><h2>SESH</h2><p class="note">a.k.a. SESHDAWGS UNITED, the label of Clara Cuvé and MCR-T.</p></div>
+  <div class="grid">
+    <figure><video muted loop autoplay playsinline preload="metadata" poster="vid/sesh-tablet.jpg" aria-label="SESH animation on a tablet"><source src="vid/sesh-tablet.mp4" type="video/mp4"></video><figcaption><b>SESH</b><br>tablet animation</figcaption></figure>
+    <figure><button data-src="img/sesh-marshmallow.jpg"><img loading="lazy" src="img/sesh-marshmallow.jpg" alt="SESH Dawgs United marshmallow badge"></button><figcaption><b>SESH Dawgs United</b><br>marshmallow variant</figcaption></figure>
+    <figure><video muted loop autoplay playsinline preload="metadata" poster="vid/sesh-seshmas.jpg" aria-label="SESHMAS VA animated Instagram story"><source src="vid/sesh-seshmas.mp4" type="video/mp4"></video><figcaption><b>SESHMAS VA</b><br>Instagram story, 9:16</figcaption></figure>
+    <figure><button data-src="img/sesh-spring-cover.jpg"><img loading="lazy" src="img/sesh-spring-cover.jpg" alt="SESH Dawgs United cover, three bulldogs in a spiked badge made of green moss"></button><figcaption><b>SESH Spring VA</b><br>cover</figcaption></figure>
+    <figure><video muted loop autoplay playsinline preload="metadata" poster="vid/sesh-reversed.jpg" aria-label="SESHMAS VA animated Instagram story"><source src="vid/sesh-reversed.mp4" type="video/mp4"></video><figcaption><b>SESHMAS VA</b><br>Spotify canvas, reversed</figcaption></figure>
+  </div>
+</section>
+
+<section id="hive">
+  <div class="head"><h2>HIVE Society Records</h2><p class="note">single covers HVS017 to HVS022. a fixed metal emblem, a new world per release.</p></div>
+  <div class="grid">
+    <figure><button data-src="img/hive-022.jpg"><img loading="lazy" src="img/hive-022.jpg" alt="HVS022 alejandrø Let Me Show You cover"></button><figcaption><b>HVS022</b> alejandrø<br>Let Me Show You</figcaption></figure>
+    <figure><button data-src="img/hive-018.jpg"><img loading="lazy" src="img/hive-018.jpg" alt="HVS018 NOTMYTYPE I Can Feel You cover"></button><figcaption><b>HVS018</b> NOTMYTYPE<br>I Can Feel You</figcaption></figure>
+    <figure><button data-src="img/hive-021.jpg"><img loading="lazy" src="img/hive-021.jpg" alt="HVS021 Dominik Saltevski New Era cover"></button><figcaption><b>HVS021</b> Dominik Saltevski<br>New Era</figcaption></figure>
+<figure><button data-src="img/hive-emblem.jpg"><img loading="lazy" src="img/hive-emblem.jpg" alt="HVSXXX Bounce Temple cover"></button><figcaption><b>HVSXXX</b><br>Bounce Temple</figcaption></figure>
+    <figure><button data-src="img/hive-019.jpg"><img loading="lazy" src="img/hive-019.jpg" alt="HVS019 KAMÄLEON Running cover"></button><figcaption><b>HVS019</b> KAMÄLEON<br>Running</figcaption></figure>
+    <figure><button data-src="img/hive-017.jpg"><img loading="lazy" src="img/hive-017.jpg" alt="HVS017 IGDA Still Alive cover"></button><figcaption><b>HVS017</b> IGDA<br>Still Alive</figcaption></figure>
+  </div>
+</section>
+
+<section id="fifty-two">
+  <div class="head"><h2>fifty__two</h2><p class="note">identity and club night posters for fifty__two at RSO.Berlin: wordmark and logo, posters and the type-free visuals behind them.</p></div>
+  <div class="grid">
+    <figure><button data-src="img/f2-identity.gif"><img loading="lazy" src="img/f2-identity.gif" alt="fifty__two. wordmark and .52 logo mark alternating, black on white"></button><figcaption><b>fifty__two. / .52</b><br>wordmark and logo, animation</figcaption></figure>
+    <figure><button data-src="img/f2s-chain-pink.jpg"><img loading="lazy" src="img/f2s-chain-pink.jpg" alt="Pink and grey cream twisted with chains, no type"></button><figcaption><b>chain and cream, pink</b></figcaption></figure>
+    <figure><video muted loop autoplay playsinline preload="metadata" poster="vid/f2-jan.jpg" aria-label="Animated fifty__two story, RSO.Berlin, 23 January 2026"><source src="vid/f2-jan.mp4" type="video/mp4"></video><figcaption><b>fifty__two.</b><br>RSO.Berlin, 23/01/26, animation</figcaption></figure>
+    <figure><button data-src="img/f2s-green-knot.jpg"><img loading="lazy" src="img/f2s-green-knot.jpg" alt="Red fabric knotted around a chain on green"></button><figcaption><b>knot, green</b></figcaption></figure>
+    <figure><button data-src="img/f2s-purple-x1.jpg"><img loading="lazy" src="img/f2s-purple-x1.jpg" alt="Orange and pink cords crossing on violet"></button><figcaption><b>cross, violet I</b></figcaption></figure>
+    <figure><button data-src="img/f2-mai.jpg"><img loading="lazy" src="img/f2-mai.jpg" alt="fifty__two poster May 2026"></button><figcaption><b>fifty__two.</b><br>RSO.Berlin, 22/05/26</figcaption></figure>
+    <figure><button data-src="img/f2s-chain-red.jpg"><img loading="lazy" src="img/f2s-chain-red.jpg" alt="Red and cream twisted with chains, no type"></button><figcaption><b>chain and cream, red</b></figcaption></figure>
+    <figure><button data-src="img/f2s-orange-twist.jpg"><img loading="lazy" src="img/f2s-orange-twist.jpg" alt="Orange and olive twisted ribbon on mauve"></button><figcaption><b>twist, orange</b></figcaption></figure>
+    <figure><button data-src="img/f2s-purple-x2.jpg"><img loading="lazy" src="img/f2s-purple-x2.jpg" alt="Orange and pink cords knotted on violet"></button><figcaption><b>cross, violet II</b></figcaption></figure>
+  </div>
+</section>
+
+<section id="visuals">
+  <div class="head"><h2>Creative direction &amp; visuals</h2><p class="note">art direction for various photo shootings and other key visuals.</p></div>
+  <div class="grid">
+    <figure class="wide"><button data-src="img/cd-persephone-back.jpg"><img loading="lazy" src="img/cd-persephone-back.jpg" alt="Back to back with pistols between two light panels"></button><figcaption><b>back to back</b><br>persephone × alejandrø</figcaption></figure>
+    <figure><video muted loop autoplay playsinline preload="metadata" poster="vid/esperate.jpg" aria-label="Animation for the Esperate remix"><source src="vid/esperate.mp4" type="video/mp4"></video><figcaption><b>Esperate (alejandrø Remix)</b><br>animation for David Löhlein</figcaption></figure>
+    <figure><button data-src="img/cd-persephone-fisheye.jpg"><img loading="lazy" src="img/cd-persephone-fisheye.jpg" alt="Fisheye portrait with a static CRT monitor"></button><figcaption><b>static</b><br>alejandrø × tvs</figcaption></figure>
+    <figure><button data-src="img/cd-persephone-sun.jpg"><img loading="lazy" src="img/cd-persephone-sun.jpg" alt="Backlit portrait of two people in a parking deck"></button><figcaption><b>daylight</b><br>persephone × alejandrø</figcaption></figure>
+    <figure><button data-src="img/vis-chrome-crimson.jpg"><img loading="lazy" src="img/vis-chrome-crimson.jpg" alt="Chrome ribbon on deep red"></button><figcaption><b>chrome, crimson</b></figcaption></figure>
+    <figure><video muted loop autoplay playsinline preload="metadata" poster="vid/vis-motion.jpg" aria-label="Animated key visual"><source src="vid/vis-motion.mp4" type="video/mp4"></video><figcaption><b>motion</b></figcaption></figure>
+    <figure><button data-src="img/cd-persephone-garage.jpg"><img loading="lazy" src="img/cd-persephone-garage.jpg" alt="Two figures in a dark caged garage corridor"></button><figcaption><b>garage</b><br>persephone × alejandrø</figcaption></figure>
+    <figure><button data-src="img/matrix-3.jpg"><img loading="lazy" src="img/matrix-3.jpg" alt="Final notice in black and white with a Matrix reference"></button><figcaption><b>final notice</b><br>Matrix terminal, dodge this</figcaption></figure>
+    <figure><button data-src="img/vis-chrome-white.jpg"><img loading="lazy" src="img/vis-chrome-white.jpg" alt="Chrome ribbon on white"></button><figcaption><b>chrome, white</b></figcaption></figure>
+    <figure><button data-src="img/cd-eisenlohr-5.jpg"><img loading="lazy" src="img/cd-eisenlohr-5.jpg" alt="Seated on a cube against red"></button><figcaption><b>red set</b><br>press shoot</figcaption></figure>
+    <figure><button data-src="img/vis-wings.jpg"><img loading="lazy" src="img/vis-wings.jpg" alt="Chrome wings floating against a dark sky"></button><figcaption><b>wings</b></figcaption></figure>
+    <figure><button data-src="img/f2s-chrome-red.jpg"><img loading="lazy" src="img/f2s-chrome-red.jpg" alt="Liquid chrome on red"></button><figcaption><b>chrome, red</b></figcaption></figure>
+    <figure><button data-src="img/cd-persephone-elevator.jpg"><img loading="lazy" src="img/cd-persephone-elevator.jpg" alt="Leaning in a steel elevator, sunglasses and chain"></button><figcaption><b>elevator</b></figcaption></figure>
+    <figure><button data-src="img/vis-tunnel-1.jpg"><img loading="lazy" src="img/vis-tunnel-1.jpg" alt="Red lit tunnel"></button><figcaption><b>tunnel</b></figcaption></figure>
+  </div>
+</section>
+
+<section id="release">
+  <div class="head"><h2>release²</h2><p class="note">monthly poster series for the Mannheim party at Disco Zwei. every month gets its own object and light.</p></div>
+  <div class="grid">
+    <figure><button data-src="img/rel-2025-01.jpg"><img loading="lazy" src="img/rel-2025-01.jpg" alt="release² January 2025 poster"></button><figcaption><b>january 2025</b></figcaption></figure>
+    <figure><button data-src="img/rel-2025-06.jpg"><img loading="lazy" src="img/rel-2025-06.jpg" alt="release² June 2025 poster with chrome and chains"></button><figcaption><b>june 2025</b></figcaption></figure>
+    <figure><button data-src="img/rel-2025-09.jpg"><img loading="lazy" src="img/rel-2025-09.jpg" alt="release² September 2025 poster with red ribbon and chain"></button><figcaption><b>september 2025</b></figcaption></figure>
+    <figure><button data-src="img/rel-2025-11.jpg"><img loading="lazy" src="img/rel-2025-11.jpg" alt="release² November 2025 poster with chain on orange"></button><figcaption><b>november 2025</b></figcaption></figure>
+    <figure><button data-src="img/rel-2025-12.jpg"><img loading="lazy" src="img/rel-2025-12.jpg" alt="release² December 2025 poster with chained candy cane"></button><figcaption><b>december 2025</b></figcaption></figure>
+    <figure><button data-src="img/rel-2026-04.jpg"><img loading="lazy" src="img/rel-2026-04.jpg" alt="release² April 2026 poster with barbed wire"></button><figcaption><b>april 2026</b></figcaption></figure>
+  </div>
+</section>
+
+<footer>
+  <span>aø media · alejandro diego arilla bielsa · mannheim · <a href="imprint.html">imprint</a> · <a href="privacy.html">privacy</a></span>
+</footer>
+</div>
+
+<div id="lb" role="dialog" aria-modal="true" aria-label="Image viewer">
+  <div class="ctl"><button class="c" id="prev" type="button">Prev</button><button class="c" id="next" type="button">Next</button><button class="c" id="close" type="button">Close</button></div>
+  <img id="lbimg" alt="">
+  <div id="lbcap"></div>
+</div>
+
+<script>
+(function(){var g=document.querySelector('.grid.ordered');if(!g)return;var items=Array.prototype.slice.call(g.children);var mq=window.matchMedia('(max-width:640px)');
+function build(){var n=mq.matches?2:3;var cols=[],h=[];g.classList.add('js');items.forEach(function(f){if(f.parentNode!==g)g.appendChild(f)});
+Array.prototype.slice.call(g.querySelectorAll('.col')).forEach(function(c){g.removeChild(c)});
+for(var i=0;i<n;i++){var c=document.createElement('div');c.className='col';g.appendChild(c);cols.push(c);h.push(0)}
+items.forEach(function(f){var k=0;for(var i=1;i<n;i++){if(h[i]<h[k]-0.001)k=i}cols[k].appendChild(f);h[k]+=(parseFloat(f.getAttribute('data-r'))||1)+0.22})}
+build();if(mq.addEventListener)mq.addEventListener('change',build);else if(mq.addListener)mq.addListener(build)})();
+</script>
+<script>
+(function(){var n=document.getElementById('intro'),b=n&&n.querySelector('.more');if(!b)return;n.classList.add('js');b.addEventListener('click',function(){var o=n.classList.toggle('open');b.setAttribute('aria-expanded',o?'true':'false');b.setAttribute('aria-label',o?'show less':'show more')})})();
+</script>
+<script>
+(function(){
+  var items=[].slice.call(document.querySelectorAll('figure button'));
+  var lb=document.getElementById('lb'),img=document.getElementById('lbimg'),cap=document.getElementById('lbcap');
+  var cur=-1,last=null;
+  function show(i){
+    cur=(i+items.length)%items.length;
+    var b=items[cur];
+    img.src=b.getAttribute('data-src');
+    img.alt=b.querySelector('img').alt;
+    cap.textContent=b.parentNode.querySelector('figcaption').innerHTML.replace(/<br\s*\/?>/gi,' · ').replace(/<[^>]+>/g,'').replace(/&amp;/g,'&');
+  }
+  function open(i){last=document.activeElement;show(i);lb.classList.add('on');document.getElementById('close').focus();}
+  function close(){lb.classList.remove('on');img.removeAttribute('src');if(last&&last.focus)last.focus();}
+  items.forEach(function(b,i){b.addEventListener('click',function(){open(i)})});
+  document.getElementById('close').addEventListener('click',close);
+  document.getElementById('prev').addEventListener('click',function(){show(cur-1)});
+  document.getElementById('next').addEventListener('click',function(){show(cur+1)});
+  lb.addEventListener('click',function(e){if(e.target===lb)close()});
+  document.addEventListener('keydown',function(e){
+    if(!lb.classList.contains('on'))return;
+    if(e.key==='Escape')close();
+    if(e.key==='ArrowRight')show(cur+1);
+    if(e.key==='ArrowLeft')show(cur-1);
+  });
+})();
+</script>
+<script>
+(function(){var n=document.querySelector('nav');if(!n)return;var b=n.querySelector('.nav-toggle');n.classList.add('js');
+b.addEventListener('click',function(){var o=n.classList.toggle('open');b.setAttribute('aria-expanded',o?'true':'false')});
+n.querySelectorAll('.nav-list a').forEach(function(a){a.addEventListener('click',function(){n.classList.remove('open');b.setAttribute('aria-expanded','false')})});
+})();
+</script>
+
+</html>
