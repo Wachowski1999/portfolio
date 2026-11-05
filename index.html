@@ -82,11 +82,13 @@ figure img,figure video{display:block;width:100%;height:auto}
 figcaption{font:400 .72rem/1.35 var(--mono);color:var(--muted);padding:8px 10px 10px;letter-spacing:.03em}
 figcaption b{font-weight:400;color:var(--fg)}
 footer a{color:inherit;text-decoration:underline;text-underline-offset:3px}
-footer a.totop{display:inline-flex;align-items:center;gap:8px;color:var(--fg);text-decoration:none;letter-spacing:.06em}
-footer a.totop svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:square;stroke-linejoin:miter;transition:transform .2s}
-footer a.totop:hover,footer a.totop:focus-visible{color:var(--accent);outline:none}
-footer a.totop:hover svg,footer a.totop:focus-visible svg{transform:translate(2px,-2px)}
 @media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+.totop-sec{padding-block:56px 8px}
+.totop-sec h2 a{display:inline-flex;align-items:center;gap:.28em;color:inherit;text-decoration:none}
+.totop-sec h2 a svg{width:.8em;height:.8em;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:square;stroke-linejoin:miter;flex:none;animation:bob 2.2s ease-in-out infinite}
+.totop-sec h2 a:hover,.totop-sec h2 a:focus-visible{color:var(--accent);outline:none}
+@keyframes bob{0%,100%{transform:translateY(.12em)}50%{transform:translateY(-.14em)}}
+@media (prefers-reduced-motion:reduce){.totop-sec h2 a svg{animation:none}}
 footer{margin-top:72px;padding-block:32px 56px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:8px 32px;justify-content:space-between;font:400 .78rem/1.5 var(--mono);color:var(--muted);letter-spacing:.04em}
 #lb{position:fixed;inset:0;z-index:50;background:rgba(5,6,7,.94);display:none;align-items:center;justify-content:center;padding:max(16px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) max(16px,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));flex-direction:column;gap:12px}
 #lb.on{display:flex}
@@ -220,9 +222,12 @@ footer{margin-top:72px;padding-block:32px 56px;border-top:1px solid var(--line);
   </div>
 </section>
 
+<section class="totop-sec" id="end">
+  <div class="head"><h2><a href="#" aria-label="back to top">top<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 19L19 5M8 5h11v11"/></svg></a></h2></div>
+</section>
+
 <footer>
   <span>aø media · alejandro diego arilla bielsa · mannheim · <a href="imprint.html">imprint</a> · <a href="privacy.html">privacy</a></span>
-  <a class="totop" href="#" aria-label="back to top"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 19L19 5M8 5h11v11"/></svg>top</a>
 </footer>
 </div>
 
