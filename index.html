@@ -78,6 +78,9 @@ figure.wide{column-span:all}
 #visuals .grid{columns:5 190px;column-gap:12px}
 #visuals figcaption{display:none}
 @media (max-width:640px){#visuals .grid{columns:3;column-gap:8px}#visuals figcaption{font-size:10px}}
+figure img.fade{transition:opacity .55s ease}
+figure img.pending{opacity:0}
+@media (prefers-reduced-motion:reduce){figure img.fade{transition:none}}
 figure img,figure video{display:block;width:100%;height:auto}
 figcaption{font:400 .72rem/1.35 var(--mono);color:var(--muted);padding:8px 10px 10px;letter-spacing:.03em}
 figcaption b{font-weight:400;color:var(--fg)}
@@ -247,6 +250,19 @@ build();if(mq.addEventListener)mq.addEventListener('change',build);else if(mq.ad
 </script>
 <script>
 (function(){var n=document.getElementById('intro'),b=n&&n.querySelector('.more');if(!b)return;n.classList.add('js');b.addEventListener('click',function(){var o=n.classList.toggle('open');b.setAttribute('aria-expanded',o?'true':'false');b.setAttribute('aria-label',o?'show less':'show more')})})();
+</script>
+<script>
+(function(){
+  var imgs=[].slice.call(document.querySelectorAll('figure img'));
+  imgs.forEach(function(im){
+    if(im.complete&&im.naturalWidth>0)return;
+    im.classList.add('fade','pending');
+    var show=function(){im.classList.remove('pending')};
+    im.addEventListener('load',show,{once:true});
+    im.addEventListener('error',show,{once:true});
+    setTimeout(show,6000);
+  });
+})();
 </script>
 <script>
 (function(){
